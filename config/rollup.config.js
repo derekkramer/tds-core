@@ -36,7 +36,7 @@ export default opts => {
       commonjs({
         include: '../../node_modules/**',
         namedExports: {
-          'airbnb-prop-types': ['childrenOfType', 'componentWithName'],
+          'airbnb-prop-types': ['childrenOfType', 'componentWithName', 'nonNegativeInteger', 'and'],
         },
       }),
       options.css &&
@@ -46,7 +46,7 @@ export default opts => {
           plugins: [autoprefixer()],
           modules: {
             Loader: CssModulesSassLoader,
-            globalModulePaths: [/packages\/SelectorCounter/, /packages\/StepTracker/],
+            globalModulePaths: [/packages\/SelectorCounter/],
             generateScopedName: 'TDS_[name]__[local]___[hash:base64:5]',
           },
         }),
