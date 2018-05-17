@@ -43,6 +43,7 @@
     font-size: 1.2rem;
     width: 35px;
     height: 35px;
+    margin-bottom: 1rem;
   }
 
   .label {
@@ -57,26 +58,28 @@
       display: block;
     }
   }
+}
 
-  &.completed {
-    .icon {
-      background-color: $color-primary;
-      text-align: center;
-      border: 0.1rem solid $color-primary;
-    }
+.completed {
+  composes: step;
+  .icon {
+    background-color: $color-primary;
+    text-align: center;
+    border: 0.1rem solid $color-primary;
+  }
+}
+
+.processing {
+  composes: step;
+  .icon {
+    background-color: $color-primary;
+    text-align: center;
+    border: 0.1rem solid $color-primary;
   }
 
-  &.processing {
-    .icon {
-      background-color: $color-primary;
-      text-align: center;
-      border: 0.1rem solid $color-primary;
-    }
-
-    .label {
-      color: $color-primary;
-      font-weight: bold;
-    }
+  .label {
+    color: $color-primary;
+    font-weight: bold;
   }
 }
 
