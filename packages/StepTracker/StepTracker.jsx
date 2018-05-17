@@ -1,8 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import AirbnbPropTypes from 'airbnb-prop-types'
-
-import { warn } from '../../shared/utils/warn'
 
 import Step from './Step/Step'
 
@@ -15,10 +12,6 @@ import styles from './StepTracker.modules.scss'
  */
 
 const StepTracker = props => {
-  if (props.current > props.steps.length) {
-    warn('StepTracker', '`current` prop is greater then the length of the `steps` prop.')
-  }
-
   return (
     <div>
       <ul className={styles.container}>
@@ -51,7 +44,24 @@ StepTracker.propTypes = {
   /**
    * The active step. The minimum value is 0, while the maximum value is the length of the steps prop.
    */
-  current: AirbnbPropTypes.and([PropTypes.number, AirbnbPropTypes.nonNegativeInteger]),
+
+  // eslint-disable-next-line consistent-return
+  current: (props, propName, componentName) => {
+    let error
+    if (props[propName] == null) {
+      error = 'Value is null. `current` prop is required.'
+    } else if (!Number.isInteger(props[propName])) {
+      error = 'Value is not an integer.'
+    } else if (props[propName] < 0) {
+      error = 'Value is less than 0.'
+    } else if (props[propName] > props.steps.length) {
+      error = 'Prop is greater then the length of the `steps` prop.'
+    }
+
+    if (error) {
+      return new Error(`Invalid prop \`${propName}\` supplied to \`${componentName}\`. ${error}`)
+    }
+  },
   /**
    * The steps as an array of strings.
    */

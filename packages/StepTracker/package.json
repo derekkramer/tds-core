@@ -26,7 +26,6 @@
   },
   "dependencies": {
     "@tds/core-decorative-icon": "^1.0.0",
-    "airbnb-prop-types": "^2.10.0",
     "prop-types": "^15.5.10"
   },
   "devDependencies": {
