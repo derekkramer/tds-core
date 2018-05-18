@@ -11,7 +11,7 @@ import styles from './StepTracker.modules.scss'
  * @version ./package.json
  */
 
-const StepTracker = ({ current, steps, stepText, outOfText }) => {
+const StepTracker = ({ current, steps, stepText }) => {
   return (
     <div>
       <ul className={styles.container}>
@@ -31,8 +31,9 @@ const StepTracker = ({ current, steps, stepText, outOfText }) => {
       </ul>
       <div className={styles.mobileLabel}>
         <span className={styles.mobileLabelStepInfo}>
-          {stepText} {current < steps.length ? current + 1 : steps.length} {outOfText}{' '}
-          {steps.length}:{' '}
+          {stepText
+            .replace('%current', current < steps.length ? current + 1 : steps.length)
+            .replace('%total', steps.length)}{' '}
         </span>
         {current < steps.length ? steps[current] : steps[steps.length - 1]}
       </div>
@@ -67,18 +68,14 @@ StepTracker.propTypes = {
    */
   steps: PropTypes.array.isRequired,
   /**
-   * String for text to display in front of current step number.
+   * String for text to display current step progress on mobile devices.
+   * Use %current to place the current step and use %total to place the total amount of steps.
    */
   stepText: PropTypes.string,
-  /**
-   * String for text to display in between current step and total step numbers.
-   */
-  outOfText: PropTypes.string,
 }
 
 StepTracker.defaultProps = {
-  stepText: 'Step',
-  outOfText: 'of',
+  stepText: 'Step %current out of %total:',
 }
 
 StepTracker.Step = Step
