@@ -75,7 +75,7 @@ StepTracker.propTypes = {
 }
 
 StepTracker.defaultProps = {
-  stepText: 'Step %current out of %total:',
+  stepText: 'Step %current of %total:',
 }
 
 StepTracker.Step = Step
