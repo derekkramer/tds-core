@@ -1,6 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import Text from '@tds/core-text'
+import Box from '@tds/core-box'
+
 import Step from './Step/Step'
 
 import styles from './StepTracker.modules.scss'
@@ -14,7 +17,7 @@ import styles from './StepTracker.modules.scss'
 const StepTracker = ({ current, steps, stepText }) => {
   return (
     <div>
-      <ul className={styles.container}>
+      <Box vertical={2} dangerouslyAddClassName={styles.container}>
         {steps.map((label, index) => {
           return (
             /* eslint-disable react/no-array-index-key */
@@ -28,14 +31,14 @@ const StepTracker = ({ current, steps, stepText }) => {
             /* eslint-enable react/no-array-index-key */
           )
         })}
-      </ul>
+      </Box>
       <div className={styles.mobileLabel}>
-        <span className={styles.mobileLabelStepInfo}>
+        <Text>
           {stepText
             .replace('%current', current < steps.length ? current + 1 : steps.length)
             .replace('%total', steps.length)}{' '}
-        </span>
-        {current < steps.length ? steps[current] : steps[steps.length - 1]}
+          {current < steps.length ? steps[current] : steps[steps.length - 1]}
+        </Text>
       </div>
     </div>
   )
