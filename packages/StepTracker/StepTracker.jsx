@@ -21,12 +21,13 @@ const StepTracker = ({ current, steps, stepText }) => {
         {steps.map((label, index) => {
           return (
             /* eslint-disable react/no-array-index-key */
-            <StepTracker.Step
+            <Step
               status={current}
               label={steps[index]}
               stepNumber={index + 1}
               stepIndex={index}
               key={index}
+              data-testid="innerStep"
             />
             /* eslint-enable react/no-array-index-key */
           )
@@ -50,22 +51,7 @@ StepTracker.propTypes = {
    */
 
   // eslint-disable-next-line consistent-return
-  current: (props, propName, componentName) => {
-    let error
-    if (props[propName] == null) {
-      error = 'Value is null. `current` prop is required.'
-    } else if (!Number.isInteger(props[propName])) {
-      error = 'Value is not an integer.'
-    } else if (props[propName] < 0) {
-      error = 'Value is less than 0.'
-    } else if (props[propName] > props.steps.length) {
-      error = 'Prop is greater then the length of the `steps` prop.'
-    }
-
-    if (error) {
-      return new Error(`Invalid prop \`${propName}\` supplied to \`${componentName}\`. ${error}`)
-    }
-  },
+  current: PropTypes.number.isRequired,
   /**
    * The steps as an array of strings.
    */
@@ -80,7 +66,5 @@ StepTracker.propTypes = {
 StepTracker.defaultProps = {
   stepText: 'Step %current of %total:',
 }
-
-StepTracker.Step = Step
 
 export default StepTracker
